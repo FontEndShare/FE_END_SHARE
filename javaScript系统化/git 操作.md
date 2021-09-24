@@ -39,6 +39,16 @@ git reabse —continue 会自动完成 git commit ，所以不用手动执行 gi
 
 5、git push
 
+6、git diff
+
+-   6.1 查看指定 commit 修改的文件列表 git diff --name-only <commit_id>
+-   6.2 git diff --cached 或 git diff --staged：显示暂存区(已 add 但未 commit 文件)和最后一次 commit(HEAD)之间的所有不相同文件的增删改(git diff --cached 和 git diff –staged 相同作用)
+
+7、git log git show
+
+-   7.1 查看一个文件的历史提交信息，git log 文件名
+-   7.2 查看某个版本文件修改情况, git show <commit_id> 文件名
+
 · git add -A 提交所有变化 · git add -u 提交被修改(modified)和被删除(deleted)文件，不包括新文件(new) · git add . 提交新文件(new)和被修改(modified)文件，不包括被删除(deleted)文件
 
 将当前分支合并分支到主分支切换到主分支，然后将其他的分支合并到主分支 git checkout branchA // 切换到其他分支 git pull origin branchA // 拉取更新 git chechkout master // 切换到主分支 git pull origin master // 更新 master 分支 git merge branchA // 将 branchA 合并到主分支 git push
