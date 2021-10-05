@@ -1,3 +1,5 @@
+/** @format */
+
 // 冒泡排序
 // 相邻的两个数比较比较大小，前一个数，比后一个数大，
 // 交换位置，进行下一步比较，如此循环，直到这一轮中，最大的数排到最后，
@@ -25,7 +27,6 @@ function bubbleSort(arr) {
  * 放到已经排好的顺序的末尾；
  * */
 
-
 function selectSort(arr) {
     if (!Array.isArray(arr) || arr.length === 0) return [];
     if (arr.length === 1) return arr;
@@ -33,10 +34,10 @@ function selectSort(arr) {
 
     for (let i = 0; i < arr.length - 1; i++) {
         minIndex = i;
-        for (let j = i + 1;j < arr.length; j++) {
+        for (let j = i + 1; j < arr.length; j++) {
             minIndex = arr[j] > arr[minIndex] ? minIndex : j;
         }
-        [arr[i],arr[minIndex]] = [arr[minIndex],arr[i]];
+        [arr[i], arr[minIndex]] = [arr[minIndex], arr[i]];
     }
     return arr;
 }
