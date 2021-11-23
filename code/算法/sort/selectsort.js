@@ -22,5 +22,5 @@ function selectSort(arr) {
 }
 
 let arr = [22, 34, 3, 32, 82, 55, 89, 50, 37, 5, 64, 100, 9, 70];
-bubbleSort(arr);
+// bubbleSort(arr);
 console.log("selectSort(arr)", selectSort(arr));

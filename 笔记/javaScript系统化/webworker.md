@@ -7,7 +7,7 @@
 -   worker
 -   sharedWorker
 
-### 通信方式
+### 通信方式(同源的 iframe 之间的通信也可以使用)
 
 -   postMessage
 -   MessageChannel
