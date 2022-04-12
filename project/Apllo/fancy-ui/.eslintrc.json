@@ -1,0 +1,52 @@
+{
+    "editor.formatOnSave": false,
+    "editor.quickSuggestions": {
+        "strings": true
+    },
+    //   "fileheader.customMade": {
+    //   "Description": "本模块用于",
+    //   "Author": "zhanshunhuai",
+    //   "Date": "Do not edit", // 文件创建时间(不变)
+    //   "LastEditors": "zhanshunhuai", // 文件最后编辑者
+    //   "LastEditTime": "Do not edit" // 文件最后编辑时间
+    // },
+    "fileheader.configObj": {
+        "annotationStr": {
+            "head": "/**", // 自定义注释头部
+            "middle": " * @", // 自定义注释中间部分(注意空格,这也是最终生成注释的一部分)
+            "end": " **/", // 自定义注释尾部
+            "use": true // 是否使用自定义注释符号
+        },
+        "autoAdd": false
+    },
+    // 每次保存的时候将代码按eslint格式进行修复
+    // "eslint.autoFixOnSave": true,
+    "workbench.startupEditor": "newUntitledFile",
+    // "editor.codeActionsOnSave": {
+    //   "source.fixAll.eslint": true
+    // },
+    // "eslint.validate": [
+    //   "javascript",
+    //   "javascriptreact",
+    //   "vue"
+    // ],
+    //配置eslint
+    "eslint.autoFixOnSave": true, //  启用保存时自动修复,默认只支持.js文件
+    "eslint.validate": [
+        "javascript", //  用eslint的规则检测js文件
+        {
+            "language": "vue", // 检测vue文件
+            "autoFix": true //  为vue文件开启保存自动修复的功能
+        },
+        {
+            "language": "html",
+            "autoFix": true
+        }
+    ],
+    "editor.tabSize": 2,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "workbench.editor.enablePreview": false,
+    "diffEditor.ignoreTrimWhitespace": false
+}
