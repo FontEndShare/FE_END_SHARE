@@ -1,14 +1,16 @@
 <template>
     <div>
-        <button>测试</button>
+        123
+        <f-button></f-button>
     </div>
 </template>
 
 <script lang="ts">
     import { defineComponent } from "vue";
+    import FButton from "@fancy-ui/components/button/src/button.vue";
     export default defineComponent({
-        setup() {
-            console.log("hello button");
+        components: {
+            FButton
         }
     });
 </script>
