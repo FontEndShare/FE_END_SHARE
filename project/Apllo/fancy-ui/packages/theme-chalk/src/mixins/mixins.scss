@@ -1,0 +1,4 @@
+// 将config中定义的变量定为全局变量
+@use "config" as *;
+
+@forward "config";

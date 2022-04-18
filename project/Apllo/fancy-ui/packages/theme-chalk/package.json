@@ -2,5 +2,8 @@
     "name": "@fancy-ui/theme-chalk",
     "private": true,
     "version": "1.0.0",
-    "license": "ISC"
+    "license": "ISC",
+    "scripts": {
+        "build": "gulp"
+    }
 }
