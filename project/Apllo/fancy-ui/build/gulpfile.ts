@@ -12,5 +12,5 @@ export default series(
     // 清除文件
     withTaskName("clean", async () => runCmd("rm -rf resource")),
     // 运行每一个包内的build命令
-    withTaskName("buildPackages", async () => runCmd("pnpm run -F ./packages --parallel build"))
+    withTaskName("buildPackages", async () => runCmd("pnpm run --parallel build --filter ./packages"))
 );

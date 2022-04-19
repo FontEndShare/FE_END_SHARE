@@ -14,6 +14,7 @@
     "author": "",
     "license": "ISC",
     "devDependencies": {
+        "@fancy-ui/build": "workspace:^1.0.0",
         "@types/gulp": "^4.0.9",
         "@types/gulp-autoprefixer": "^0.0.33",
         "@types/gulp-clean-css": "^4.3.0",
@@ -23,6 +24,7 @@
         "gulp-autoprefixer": "^8.0.0",
         "gulp-clean-css": "^4.3.0",
         "gulp-sass": "^5.1.0",
+        "gulp-typescript": "6.0.0-alpha.1",
         "sass": "^1.50.0",
         "sucrase": "^3.21.0",
         "typescript": "^4.6.3",
