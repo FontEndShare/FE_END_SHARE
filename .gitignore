@@ -9,3 +9,7 @@ Apllo/vue2/.yarn/
 project/Apllo/fancy-ui-book/node_modules
 project/Apllo/fancy-ui/node_modules
 project/Apllo/vue-vite/node_modules
+project/Apllo/fancy-ui/pnpm-lock.yaml
+project/Apllo/fancy-ui/play/node_modules/.package-lock.json
+project/Apllo/fancy-ui/play/node_modules/
+project/Apllo/fancy-ui/play/package-lock.json
