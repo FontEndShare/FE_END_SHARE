@@ -166,3 +166,55 @@ hash 配置
 -   1.全局 hash: filename: 'js/[name].[hash].js',所有文件的 hash 值都一样，每次编译，所有文件的 hash 都会改变
 -   2.分组 hash: filename: 'js/[name].[chunkhash].js',打包后的 hash 值会根据入口文件的不用而不一样，当某个入口文件修改后重新打包，会导致本入口文件关联的所有文件的 hash 值都修改，但是不会影响到其他入口文件的 hash 值
 -   3.内容 hash: filename: 'js/[name].[contenthash].js',打包后，每个文件的 hash 值都不一样，修改某个文件后，对应文件的 hash 会发生变化
+
+编译阶段
+
+run 阶段：启动一次新的编译。this.hooks.run.callAsync。
+
+compile: 该事件是为了告诉插件一次新的编译将要启动，同时会给插件带上 compiler 对象。
+
+compilation: 当 Webpack 以开发模式运行时，每当检测到文件变化，一次新的 Compilation 将被创建。一个 Compilation 对象包含了当前的模块资源、编译生成资源、变化的文件等。Compilation 对象也提供了很多事件回调供插件做扩展。
+
+make:一个新的 Compilation 创建完毕主开始编译 完毕主开始编译 this.hooks.make.callAsync。
+
+addEntry: 即将从 Entry 开始读取文件。
+
+addModuleChain: 根据依赖查找对应的工厂函数，并调用工厂函数的 create 来生成一个空的 MultModule 对象，并且把 MultModule 对象存入 compilation 的 modules 中后执行 MultModule.build。
+
+buildModules: 使用对应的 Loader 去转换一个模块。开始编译模块,this.buildModule(module) buildModule(module, optional, origin,dependencies, thisCallback)。
+
+build: 开始真正编译模块。
+
+doBuild: 开始真正编译入口模块。
+
+normal-module-loader: 在用 Loader 对一个模块转换完后，使用 acorn 解析转换后的内容，输出对应的抽象语法树（AST），以方便 Webpack 后面对代码的分析。
+
+program: 从配置的入口模块开始，分析其 AST，当遇到 require 等导入其它模块语句时，便将其加入到依赖的模块列表，同时对新找出的依赖模块递归分析，最终搞清所有模块的依赖关系。
+
+输出阶段
+
+seal: 封装 compilation.seal seal(callback)。
+
+addChunk: 生成资源 addChunk(name)。
+
+createChunkAssets: 创建资源 this.createChunkAssets()。
+
+getRenderManifest: 获得要渲染的描述文件 getRenderManifest(options)。
+
+render: 渲染源码 source = fileManifest.render()。
+
+afterCompile: 编译结束 this.hooks.afterCompile。
+
+shouldEmit: 所有需要输出的文件已经生成好，询问插件哪些文件需要输出，哪些不需要。this.hooks.shouldEmit。
+
+emit: 确定好要输出哪些文件后，执行文件输出，可以在这里获取和修改输出内容。
+
+done: 全部完成 this.hooks.done.callAsync。
+
+Tapable:
+注册：tap tapAsync tapPromise
+触发回调：call callAsync callPromise
+钩子类型： 1.基本类型：按钩子注册顺序，逐次调用回调
+2.waterfall：前一个回调的返回值会被带入下一个回调
+3.bail：逐次调用回调，若有任何一个回调返回非 undefined 值，则终止后续调用
+4.loop：：逐次、循环调用，直到所有回调函数都返回 undefined
