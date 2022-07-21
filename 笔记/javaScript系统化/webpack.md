@@ -167,49 +167,18 @@ hash 配置
 -   2.分组 hash: filename: 'js/[name].[chunkhash].js',打包后的 hash 值会根据入口文件的不用而不一样，当某个入口文件修改后重新打包，会导致本入口文件关联的所有文件的 hash 值都修改，但是不会影响到其他入口文件的 hash 值
 -   3.内容 hash: filename: 'js/[name].[contenthash].js',打包后，每个文件的 hash 值都不一样，修改某个文件后，对应文件的 hash 会发生变化
 
-编译阶段
-
-run 阶段：启动一次新的编译。this.hooks.run.callAsync。
-
-compile: 该事件是为了告诉插件一次新的编译将要启动，同时会给插件带上 compiler 对象。
-
-compilation: 当 Webpack 以开发模式运行时，每当检测到文件变化，一次新的 Compilation 将被创建。一个 Compilation 对象包含了当前的模块资源、编译生成资源、变化的文件等。Compilation 对象也提供了很多事件回调供插件做扩展。
-
-make:一个新的 Compilation 创建完毕主开始编译 完毕主开始编译 this.hooks.make.callAsync。
-
-addEntry: 即将从 Entry 开始读取文件。
-
-addModuleChain: 根据依赖查找对应的工厂函数，并调用工厂函数的 create 来生成一个空的 MultModule 对象，并且把 MultModule 对象存入 compilation 的 modules 中后执行 MultModule.build。
-
-buildModules: 使用对应的 Loader 去转换一个模块。开始编译模块,this.buildModule(module) buildModule(module, optional, origin,dependencies, thisCallback)。
-
-build: 开始真正编译模块。
-
-doBuild: 开始真正编译入口模块。
-
-normal-module-loader: 在用 Loader 对一个模块转换完后，使用 acorn 解析转换后的内容，输出对应的抽象语法树（AST），以方便 Webpack 后面对代码的分析。
-
-program: 从配置的入口模块开始，分析其 AST，当遇到 require 等导入其它模块语句时，便将其加入到依赖的模块列表，同时对新找出的依赖模块递归分析，最终搞清所有模块的依赖关系。
-
-输出阶段
-
-seal: 封装 compilation.seal seal(callback)。
-
-addChunk: 生成资源 addChunk(name)。
-
-createChunkAssets: 创建资源 this.createChunkAssets()。
-
-getRenderManifest: 获得要渲染的描述文件 getRenderManifest(options)。
-
-render: 渲染源码 source = fileManifest.render()。
-
-afterCompile: 编译结束 this.hooks.afterCompile。
-
-shouldEmit: 所有需要输出的文件已经生成好，询问插件哪些文件需要输出，哪些不需要。this.hooks.shouldEmit。
-
-emit: 确定好要输出哪些文件后，执行文件输出，可以在这里获取和修改输出内容。
-
-done: 全部完成 this.hooks.done.callAsync。
+初始化阶段：
+初始化参数：从配置文件、 配置对象、Shell 参数中读取，与默认配置结合得出最终的参数
+创建编译器对象：用上一步得到的参数创建 Compiler 对象
+初始化编译环境：包括注入内置插件、注册各种模块工厂、初始化 RuleSet 集合、加载配置的插件等
+开始编译：执行 compiler 对象的 run 方法
+确定入口：根据配置中的 entry 找出所有的入口文件，调用 compilition.addEntry 将入口文件转换为 dependence 对象
+构建阶段：
+编译模块(make)：根据 entry 对应的 dependence 创建 module 对象，调用 loader 将模块转译为标准 JS 内容，调用 JS 解释器将内容转换为 AST 对象，从中找出该模块依赖的模块，再 递归 本步骤直到所有入口依赖的文件都经过了本步骤的处理
+完成模块编译：上一步递归处理所有能触达到的模块后，得到了每个模块被翻译后的内容以及它们之间的 依赖关系图
+生成阶段：
+输出资源(seal)：根据入口和模块之间的依赖关系，组装成一个个包含多个模块的 Chunk，再把每个 Chunk 转换成一个单独的文件加入到输出列表，这步是可以修改输出内容的最后机会
+写入文件系统(emitAssets)：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
 
 Tapable:
 注册：tap tapAsync tapPromise
