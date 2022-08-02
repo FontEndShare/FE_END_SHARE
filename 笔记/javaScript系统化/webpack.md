@@ -181,9 +181,12 @@ hash 配置
 写入文件系统(emitAssets)：在确定好输出内容后，根据配置确定输出的路径和文件名，把文件内容写入到文件系统
 
 Tapable:
-注册：tap tapAsync tapPromise
-触发回调：call callAsync callPromise
-钩子类型： 1.基本类型：按钩子注册顺序，逐次调用回调
-2.waterfall：前一个回调的返回值会被带入下一个回调
-3.bail：逐次调用回调，若有任何一个回调返回非 undefined 值，则终止后续调用
-4.loop：：逐次、循环调用，直到所有回调函数都返回 undefined
+
+> 注册：tap tapAsync tapPromise
+> 触发回调：call callAsync callPromise
+> 钩子类型：
+
+-   1.基本类型：按钩子注册顺序，逐次调用回调
+-   2.waterfall：前一个回调的返回值会被带入下一个回调
+-   3.bail：逐次调用回调，若有任何一个回调返回非 undefined 值，则终止后续调用
+-   4.loop：：逐次、循环调用，直到所有回调函数都返回 undefined

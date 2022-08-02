@@ -8,7 +8,7 @@
 -   sharedWorker:共享工作者线程
 -   serviceWorker:服务工作者线程
 
-### 通信方式(同源的 iframe 之间的通信也可以使用)
+### 通信方式(同源或跨源的 iframe 之间的通信也可以使用)
 
 -   postMessage：隐式使用 MessagePort
 -   MessageChannel：通过 MessagePort 通信
