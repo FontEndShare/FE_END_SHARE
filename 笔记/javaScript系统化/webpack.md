@@ -87,6 +87,14 @@ https://segmentfault.com/a/1190000021074403
 >
 > 2、打包的时候，避免重复打包依赖；
 
+sourceMap
+
+> eval：生成代码 每个模块都被 eval 执行
+> cheap：生成 Source Map 不包含列的信息，也不包含 loader 的 Source Map 信息。
+> module：生成的 Source Map 包含 loader 的信息。
+> source-map：生成最完整，最高质量的 Source Map，并产生.map 文件。
+> inline：将.map 文件昨晚 DataUrl 嵌入，不单独生成.map 文件
+
 多入口文件打包配置
 
 > entry：需要多个入口 js 文件
